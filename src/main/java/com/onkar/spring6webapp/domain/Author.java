@@ -3,6 +3,7 @@ package com.onkar.spring6webapp.domain;
 import jakarta.persistence.*;
 
 import javax.annotation.processing.Generated;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,6 +14,8 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
+
+
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
@@ -49,5 +52,33 @@ public class Author {
         this.firstName = firstName;
     }
 
+//toString method allows to create a string which can be printed easily
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", books=" + books +
+                '}';
+    }
+
+    //Equals and hashcode methods allows hibernate to distinguish between two obejcts ie.
+    //in this case we have made id as comparing part if two objects have same id then
+    //they will be considered as same.
+    //used generate from intellij to create this .
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Author author = (Author) o;
+        return Objects.equals(getId(), author.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
 
 }
