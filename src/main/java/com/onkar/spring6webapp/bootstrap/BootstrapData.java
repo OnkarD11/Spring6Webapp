@@ -48,6 +48,9 @@ public class BootstrapData implements CommandLineRunner {
         Book dddSaved = bookRepository.save(ddd);
         dddSaved.setPublisher(publisherSaved);
 
+        onkarSaved.getBooks().add(dddSaved);
+        dddSaved.getAuthors().add(onkarSaved);
+
         Author onkar2 = new Author();
         onkar.setFirstName("Onkar2");
         onkar.setLastName("Dhengale2");
@@ -60,8 +63,9 @@ public class BootstrapData implements CommandLineRunner {
         Book dddSaved2 = bookRepository.save(ddd2);
         dddSaved2.setPublisher(publisherSaved);
 
-        onkarSaved.getBooks().add(dddSaved);
+
         onkarSaved2.getBooks().add(dddSaved2);
+        dddSaved2.getAuthors().add(onkarSaved2);
 
         //persisting the book association
         authorRepository.save(onkarSaved);
